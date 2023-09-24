@@ -37,7 +37,7 @@ function AccountOperations() {
     if (!loanAmount || !loanPurpose) return;
     dispatch(requestLoan(loanAmount, loanPurpose));
     setLoanAmount("");
-    setLoanPurpose("");
+    setLoanPurpose("USD");
   }
 
   function handlePayLoan() {
@@ -66,7 +66,7 @@ function AccountOperations() {
           </select>
 
           <button onClick={handleDeposit} disabled={isLoading}>
-            Deposit {depositAmount}
+            {isLoading ? "Converting..." : `Deposit${depositAmount}`}
           </button>
         </div>
 
