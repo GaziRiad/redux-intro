@@ -1,3 +1,7 @@
+// import { useSelector } from "react-redux";
+
+import { connect } from "react-redux";
+
 function formatCurrency(value) {
   return new Intl.NumberFormat("en", {
     style: "currency",
@@ -5,8 +9,17 @@ function formatCurrency(value) {
   }).format(value);
 }
 
-function BalanceDisplay() {
-  return <div className="balance">{formatCurrency(123456)}</div>;
+function BalanceDisplay({ balance }) {
+  // const { balance } = useSelector((store) => store.account);
+
+  return <div className="balance">{formatCurrency(balance)}</div>;
 }
 
-export default BalanceDisplay;
+// The old way of connecting redux to react (before hooks !!)
+
+function mapStateToProps(state) {
+  return {
+    balance: state.account.balance,
+  };
+}
+export default connect(mapStateToProps)(BalanceDisplay);
